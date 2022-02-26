@@ -6,6 +6,8 @@ Instructions
 
 - Instructions after installing fabric-samples and running test network
 
+Good reference article https://kctheservant.medium.com/deep-dive-into-fabcar-revised-57cb54642572
+
 Copy javascript folder in fabcar and call it apiserver (in same location as it)
 
 Create a new file called apiserver.js in apiserver folder, copy / paste from here https://github.com/thomastibin/apiserver/blob/master/apiserver/apiserver.js
