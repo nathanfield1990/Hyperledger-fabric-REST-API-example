@@ -1,0 +1,1163 @@
+[
+    {
+        "id": "df1ec3ecfab11de3",
+        "type": "tab",
+        "label": "Send Data To HLF",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "84abba7976cbf00b",
+        "type": "pccc in",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "26917453cdbcb59b",
+        "mode": "all",
+        "variable": "",
+        "diff": true,
+        "name": "",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1dee28f15e3f0adf",
+        "type": "pccc in",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "26917453cdbcb59b",
+        "mode": "single",
+        "variable": "Random_Timer_Value",
+        "diff": true,
+        "name": "Timer ACC Value",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "97c5b6889a4c966a",
+                "adf76cb16ddb445b",
+                "ca4bdfbc8952bc8d"
+            ]
+        ]
+    },
+    {
+        "id": "97c5b6889a4c966a",
+        "type": "ui_chart",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "5c2a045d47c78868",
+        "order": 1,
+        "width": 5,
+        "height": 5,
+        "label": "Timer Accumulated Value",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "411c801ae59b6726",
+        "type": "pccc in",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "26917453cdbcb59b",
+        "mode": "single",
+        "variable": "Random_Counter_Accumulated",
+        "diff": true,
+        "name": "Counter ACC Value",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "8122aa8c3b6915fd",
+                "d2fced900c462b7a"
+            ]
+        ]
+    },
+    {
+        "id": "8122aa8c3b6915fd",
+        "type": "ui_chart",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "5c2a045d47c78868",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "label": "Counter Accumulated Value",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 420,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "440b68273d123ec0",
+        "type": "function",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "func": "val = msg.payload;\nmsg.payload = {\n    \"carid\":\"NEW_PLC\",\n    \"make\":\"Honda\",\n    \"model\":String(val),\n    \"colour\":\"black\",\n    \"owner\":\"Tom\"\n    \n}\nreturn msg\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 280,
+        "wires": [
+            [
+                "12dcd13a83a68b6d"
+            ]
+        ]
+    },
+    {
+        "id": "5665c25bbb0f7d35",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "Send Data To Fabric Test Data",
+        "info": "",
+        "x": 1420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1c2dd99151bca31c",
+        "type": "pccc in",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "26917453cdbcb59b",
+        "mode": "single",
+        "variable": "Production Done",
+        "diff": true,
+        "name": "Production Completed",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "12dcd13a83a68b6d",
+        "type": "http request",
+        "z": "df1ec3ecfab11de3",
+        "name": "HTTP POST",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.22:8080/api/addcar",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 1550,
+        "y": 280,
+        "wires": [
+            [
+                "3ddace0d41a91217"
+            ]
+        ]
+    },
+    {
+        "id": "ed84528c6634d82c",
+        "type": "http request",
+        "z": "df1ec3ecfab11de3",
+        "name": "HTTP GET",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.22:8080/api/queryallcars",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 930,
+        "y": 100,
+        "wires": [
+            [
+                "7fb40fd3f6636cd5",
+                "717e3db2db20d638"
+            ]
+        ]
+    },
+    {
+        "id": "ef096b738f97c3d6",
+        "type": "ui_switch",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "label": "Get All Data From Fabric",
+        "tooltip": "",
+        "group": "b176e523fcb88cba",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 730,
+        "y": 100,
+        "wires": [
+            [
+                "ed84528c6634d82c"
+            ]
+        ]
+    },
+    {
+        "id": "7fb40fd3f6636cd5",
+        "type": "ui_text",
+        "z": "df1ec3ecfab11de3",
+        "group": "106a0112385a7066",
+        "order": 3,
+        "width": "10",
+        "height": "4",
+        "name": "",
+        "label": "Blockchain Data",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1120,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "5eb4b1d3c0be1502",
+        "type": "ui_button",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "b176e523fcb88cba",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send Data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1230,
+        "y": 280,
+        "wires": [
+            [
+                "440b68273d123ec0"
+            ]
+        ]
+    },
+    {
+        "id": "3ddace0d41a91217",
+        "type": "ui_text",
+        "z": "df1ec3ecfab11de3",
+        "group": "106a0112385a7066",
+        "order": 1,
+        "width": "10",
+        "height": "2",
+        "name": "",
+        "label": "Send Test Data To Fabric",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1610,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6966feb723c168b2",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "Get Data From Micrologix PLC",
+        "info": "",
+        "x": 310,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d2fced900c462b7a",
+        "type": "ui_gauge",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "5c2a045d47c78868",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Counter Accumulated Value",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 420,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "adf76cb16ddb445b",
+        "type": "ui_gauge",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "5c2a045d47c78868",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Timer Accumulated Value",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2c87b874b76411f3",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "OPC-UA Data Capture From Server",
+        "info": "",
+        "x": 360,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b417a696f43d3d90",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "Get Data From Fabric",
+        "info": "",
+        "x": 920,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8b51f9f1c3a53bd9",
+        "type": "function",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "func": "msg.payload = {\n    \"carid\": \"hello\",\n    \"type\": \"Production Data\",\n    \"val\": String(msg.payload),\n    \"tag\": \"Senor_1_QC_Pass\",\n    \"time\": \"2022-02-21\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 680,
+        "wires": [
+            [
+                "fece71399ce24fff",
+                "ca4bdfbc8952bc8d"
+            ]
+        ]
+    },
+    {
+        "id": "611dc48ed02e641c",
+        "type": "mqtt in",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "topic": "nftesting",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "d4f4466140d68f71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 500,
+        "y": 680,
+        "wires": [
+            [
+                "8b51f9f1c3a53bd9"
+            ]
+        ]
+    },
+    {
+        "id": "cb928e7a7994cdc2",
+        "type": "OpcUa-Client",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "d4e5a9fd27aea677",
+        "action": "readmultiple",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "22241059ef30a6c5",
+                "684a197a315cb16a",
+                "ca4bdfbc8952bc8d"
+            ]
+        ]
+    },
+    {
+        "id": "0c7bc48ef0fb1ad6",
+        "type": "inject",
+        "z": "df1ec3ecfab11de3",
+        "name": "Read all",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "readmultiple",
+        "payload": "",
+        "payloadType": "str",
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "cb928e7a7994cdc2",
+                "961eb8ad983023d0"
+            ]
+        ]
+    },
+    {
+        "id": "f54fe5da328c55da",
+        "type": "inject",
+        "z": "df1ec3ecfab11de3",
+        "name": "Clear",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "clearitems",
+        "payload": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f0985e53b83ae9e",
+        "type": "inject",
+        "z": "df1ec3ecfab11de3",
+        "name": "Add variable",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "c3e217e9fa02c8b2",
+                "961eb8ad983023d0"
+            ]
+        ]
+    },
+    {
+        "id": "c3e217e9fa02c8b2",
+        "type": "OpcUa-Item",
+        "z": "df1ec3ecfab11de3",
+        "item": "ns=2;s=Tag11",
+        "datatype": "Int16",
+        "value": "",
+        "name": "Input_Bit",
+        "x": 280,
+        "y": 460,
+        "wires": [
+            [
+                "cb928e7a7994cdc2"
+            ]
+        ]
+    },
+    {
+        "id": "55794a570db8ed73",
+        "type": "mqtt out",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "topic": "nftesting",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d4f4466140d68f71",
+        "x": 340,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e99896b45737db58",
+        "type": "inject",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hello",
+        "payloadType": "str",
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "55794a570db8ed73"
+            ]
+        ]
+    },
+    {
+        "id": "22241059ef30a6c5",
+        "type": "ui_chart",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "26e287517139e364",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "OPC-UA Data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "684a197a315cb16a",
+        "type": "ui_gauge",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "group": "26e287517139e364",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "OPC-UA Data",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "20",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 740,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b365b49e14f68f2a",
+        "type": "ui_text_input",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "label": "MQTT Input",
+        "tooltip": "",
+        "group": "f94117ab1acf27a6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 120,
+        "y": 660,
+        "wires": [
+            [
+                "55794a570db8ed73"
+            ]
+        ]
+    },
+    {
+        "id": "fece71399ce24fff",
+        "type": "ui_text",
+        "z": "df1ec3ecfab11de3",
+        "group": "f94117ab1acf27a6",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Data from subscription",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d3cafa19e315c63b",
+        "type": "OpcUa-Client",
+        "z": "df1ec3ecfab11de3",
+        "endpoint": "d4e5a9fd27aea677",
+        "action": "readmultiple",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 460,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "961eb8ad983023d0",
+        "type": "OpcUa-Item",
+        "z": "df1ec3ecfab11de3",
+        "item": "ns=2;s=Tag12",
+        "datatype": "Int16",
+        "value": "",
+        "name": "Input_Bit",
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "d3cafa19e315c63b"
+            ]
+        ]
+    },
+    {
+        "id": "c076ad97ae25e2b6",
+        "type": "http request",
+        "z": "df1ec3ecfab11de3",
+        "name": "HTTP GET",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.22:8080/api/query/NEW_PLC",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 990,
+        "y": 160,
+        "wires": [
+            [
+                "6774318d109a79ef"
+            ]
+        ]
+    },
+    {
+        "id": "2ece2c9091e7c2da",
+        "type": "ui_switch",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "label": "Query Specific Data From Fabric",
+        "tooltip": "",
+        "group": "b176e523fcb88cba",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "c076ad97ae25e2b6"
+            ]
+        ]
+    },
+    {
+        "id": "6774318d109a79ef",
+        "type": "ui_text",
+        "z": "df1ec3ecfab11de3",
+        "group": "106a0112385a7066",
+        "order": 3,
+        "width": "10",
+        "height": "4",
+        "name": "",
+        "label": "Blockchain Data",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1180,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "717e3db2db20d638",
+        "type": "file",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "filename": "C:\\Users\\natha\\Desktop\\Node RED Fabric Files\\fabricData.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1440,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0448ea70eadebaa4",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "Simulate MQTT Data",
+        "info": "",
+        "x": 320,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c324e4b7b2540d08",
+        "type": "comment",
+        "z": "df1ec3ecfab11de3",
+        "name": "Receive MQTT Data",
+        "info": "",
+        "x": 750,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "ca4bdfbc8952bc8d",
+        "type": "gate",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 990,
+        "y": 460,
+        "wires": [
+            [
+                "ad9913e974aabb81"
+            ]
+        ]
+    },
+    {
+        "id": "c51a2479fdb849fb",
+        "type": "function",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "func": "val = msg.payload;\nmsg.payload = {\n    \"carid\":\"PLC1\",\n    \"make\":\"AB\",\n    \"model\":String(val),\n    \"colour\":\"black\",\n    \"owner\":\"Nathan\"\n    \n}\nreturn msg\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 460,
+        "wires": [
+            [
+                "21fba3c0ed30f550"
+            ]
+        ]
+    },
+    {
+        "id": "21fba3c0ed30f550",
+        "type": "http request",
+        "z": "df1ec3ecfab11de3",
+        "name": "HTTP POST",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.22:8080/api/addcar",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 1490,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad9913e974aabb81",
+        "type": "trigger",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "10",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "true",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1150,
+        "y": 460,
+        "wires": [
+            [
+                "c51a2479fdb849fb"
+            ]
+        ]
+    },
+    {
+        "id": "3704cb6657edfa0a",
+        "type": "ui_switch",
+        "z": "df1ec3ecfab11de3",
+        "name": "",
+        "label": "Send OPC-UA, MQTT, PLC Data To Fabric",
+        "tooltip": "",
+        "group": "b176e523fcb88cba",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "open",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "close",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "ca4bdfbc8952bc8d"
+            ]
+        ]
+    },
+    {
+        "id": "6ead09df744ff428",
+        "type": "ui_spacer",
+        "z": "df1ec3ecfab11de3",
+        "name": "spacer",
+        "group": "f94117ab1acf27a6",
+        "order": 2,
+        "width": "1",
+        "height": "5"
+    },
+    {
+        "id": "26917453cdbcb59b",
+        "type": "pccc endpoint",
+        "address": "192.168.0.222",
+        "port": "44818",
+        "userouting": false,
+        "routingbuf": "[1,0]",
+        "cycletime": "500",
+        "timeout": "1500",
+        "name": "Micrologx 1100 PLC",
+        "vartable": [
+            {
+                "addr": "O:0/0",
+                "name": "Test_Output_1"
+            },
+            {
+                "addr": "I:0/0",
+                "name": "Prox_In"
+            },
+            {
+                "addr": "B3:0/0",
+                "name": "Input_1_Node_RED"
+            },
+            {
+                "addr": "B3:0/1",
+                "name": "Toggle_Force_1"
+            },
+            {
+                "addr": "T4:0.ACC",
+                "name": "Random_Timer_Value"
+            },
+            {
+                "addr": "C5:0.ACC",
+                "name": "Random_Counter_Accumulated"
+            },
+            {
+                "addr": "T4:0.PRE",
+                "name": "Random_Timer_Preset"
+            },
+            {
+                "addr": "C5:0.DN",
+                "name": "Production Done"
+            }
+        ]
+    },
+    {
+        "id": "5c2a045d47c78868",
+        "type": "ui_group",
+        "name": "AB PLC Data",
+        "tab": "58aa092c6062b05c",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b176e523fcb88cba",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "58aa092c6062b05c",
+        "order": 4,
+        "disp": true,
+        "width": 5,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "106a0112385a7066",
+        "type": "ui_group",
+        "name": "Data",
+        "tab": "58aa092c6062b05c",
+        "order": 6,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d4f4466140d68f71",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d4e5a9fd27aea677",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://laptop-5p4jao71:62640/IntegrationObjects/ServerSimulator",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "26e287517139e364",
+        "type": "ui_group",
+        "name": "OPC-UA Data",
+        "tab": "58aa092c6062b05c",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f94117ab1acf27a6",
+        "type": "ui_group",
+        "name": "MQTT",
+        "tab": "58aa092c6062b05c",
+        "order": 7,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "58aa092c6062b05c",
+        "type": "ui_tab",
+        "name": "PLC ",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
